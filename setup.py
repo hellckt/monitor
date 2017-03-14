@@ -6,7 +6,7 @@ VERSION = (0, 0, 1)
 
 __version__ = ".".join(map(str, VERSION))
 __status__ = "Alpha"
-__description__ = "Simple web visit monitor system powered by mitmptoxy"
+__description__ = "Simple web visit monitor system"
 __author__ = "hellckt"
 __email__ = "scottzkt@gmail.com"
 __license__ = "MIT License"
@@ -20,7 +20,7 @@ except:
 setup(
     name='monitor',
     version=__version__,
-    url='https://github.com/hellckt/mitmproxy',
+    url='https://github.com/hellckt/monitor',
     author=__author__,
     author_email=__email__,
     description=__description__,
