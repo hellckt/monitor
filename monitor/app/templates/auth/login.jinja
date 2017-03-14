@@ -1,0 +1,26 @@
+{% extends "base.jinja" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}登录{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="page-header content-main-padding">
+                    <h1>登录</h1>
+                </div>
+                <div class="content-main-padding">
+                    {{ wtf.quick_form(form) }}
+                    <br>
+                    {% if not exist_user %}
+                    <p>首次使用? <a href="{{ url_for('auth.register') }}">点击注册</a>.
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+{% endblock %}

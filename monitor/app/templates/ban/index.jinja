@@ -1,0 +1,58 @@
+{% extends 'base.jinja' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% import '_macros.jinja' as macros %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>域名</th>
+                        <th>仅屏蔽域名</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ban in bans %}
+                        <tr>
+                            <td>{{ ban.id }}</td>
+                            <td>
+                                <a href="{{ "//" ~ ban.netloc }}"
+                                   target="_blank">{{ ban.netloc }}</a>
+                            </td>
+                            {% if ban.only_netloc %}
+                                <td><b>是</b></td>
+                                <td>
+                                </td>
+                            {% else %}
+                                <td><b>否</b></td>
+                                <td>
+                                    <a href="{{ url_for('ban.detail', ban_id=ban.id) }}">查看</a>
+                                </td>
+                            {% endif %}
+                            <td>
+                                <a href="{{ url_for('ban.delete_ban', ban_id=ban.id) }}">删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if pagination %}
+                    <div class="row text-center">
+                        {{ macros.pagination_widget(pagination, 'ban.index') }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="page-header">
+                    <h1>新增网址</h1>
+                </div>
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

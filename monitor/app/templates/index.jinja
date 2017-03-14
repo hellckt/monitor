@@ -1,0 +1,49 @@
+{% extends 'base.jinja' %}
+{% import '_macros.jinja' as macros %}
+
+
+{% block title %}
+    首页
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>网址</th>
+                    <th>访问次数</th>
+                    <th>最后访问时间</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for flow in flows %}
+                    <tr>
+                        <td>
+                            <a href="{{ "//%s%s" | format(flow.netloc, flow.full_path) }}"
+                               target="_blank"
+                               title="{{ "//%s%s" | format(flow.netloc, flow.full_path) }}">
+                                {{ "%s://%s%s" | format(flow.scheme, flow.netloc, flow.full_path) | truncate(99) }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ flow.total }}
+                        </td>
+                        <td>{{ flow.create_timestamp }}</td>
+                        <td>
+                            <a href="{{ url_for('flow.detail', flow_id=flow.id) }}">操作</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if pagination %}
+            <div class="row text-center">
+                {{ macros.pagination_widget(pagination, '.index') }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

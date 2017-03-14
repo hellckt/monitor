@@ -1,0 +1,17 @@
+{% extends 'base.jinja' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="page-header">
+                    <h1>添加拦截规则</h1>
+                </div>
+                {{ wtf.quick_form(form) }}
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+{% endblock %}
