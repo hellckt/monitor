@@ -22,7 +22,7 @@ def index():
     form = BanForm()
     if form.validate_on_submit():
         # parse 返回的是bytes类型
-        scheme, netloc, port, full_path = parse(form.url.data)
+        scheme, netloc, port, full_path = parse(form.url.data.strip())
         scheme = scheme.decode('utf-8')
         netloc = netloc.decode('utf-8')
         full_path = full_path.decode('utf-8')
